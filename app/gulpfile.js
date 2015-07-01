@@ -40,12 +40,21 @@ gulp.task('jshint',['coffee'], function(){
 gulp.task('server',['coffee'], function(){
   
   var nodemon = require('gulp-nodemon');
-  
+  var livereload = require('gulp-livereload');
+  var notify = require('gulp-notify');
+
+  livereload.listen();
+
   return nodemon({
     script: './bin/www.coffee',
-    ext: 'hbs coffee less'
+    ext: 'hbs coffee less',
+    stdout: false
   }).on('restart',['jshint','less'], function(){
-		console.log ( 'Restarted!');
+    setTimeout(function () {
+      livereload.changed('./bin/www.coffee');
+      gulp.src('./bin/www.coffee').pipe(notify('Reloading page, please wait...'));
+
+    }, 1000);
 	});
 });
 
