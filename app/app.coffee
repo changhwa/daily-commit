@@ -8,6 +8,7 @@ session = require 'express-session'
 passport = require 'passport'
 GithubStrategy = require('passport-github').Strategy
 
+models = require './src/model'
 routes = require './src/routes/index'
 users = require './src/routes/users'
 
@@ -35,6 +36,8 @@ app.use express.static path.join __dirname, 'public'
 app.use passport.initialize()
 app.use passport.session()
 
+# todo : 차후 github 인증 부분은 소스 분리할것
+
 getConfig = ->
   return (
     clientID: '4ca7bf161f54ef2e2b71'
@@ -43,7 +46,12 @@ getConfig = ->
   )
 
 passport.use new GithubStrategy getConfig(), (accessToken, refreshToken, profile, done) ->
+  userModel = models.userModel
   user = profile._json
+  userModel.find(where: user_access_token: accessToken).then (_result) ->
+    console.log _result
+    if !_result
+      userModel.build( user_access_token: accessToken, user_id: user.id, user_name: user.login).save()
   return done(null, {accessToken, refreshToken, profile:user})
 
 passport.serializeUser (user, done) ->
