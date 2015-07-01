@@ -17,5 +17,9 @@ class GithubApi
     github.repos.get param, (err, res) ->
       return cb(res)
 
+  getRepositoryCommits: (model, cb) ->
+    github.repos.getCommits model, (err, res) ->
+      return cb(res)
+
 
 module.exports = GithubApi
