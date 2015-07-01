@@ -10,6 +10,7 @@
   "dependencies": {
     "Bootflat": "~2.0.4",
     "bootstrap": "~3.3.5",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "flat-ui": "~2.2.2"
   }
 }

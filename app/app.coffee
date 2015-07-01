@@ -43,8 +43,8 @@ getConfig = ->
   )
 
 passport.use new GithubStrategy getConfig(), (accessToken, refreshToken, profile, done) ->
-    user = profile._json
-    return done(null, {accessToken, refreshToken, profile:user})
+  user = profile._json
+  return done(null, {accessToken, refreshToken, profile:user})
 
 passport.serializeUser (user, done) ->
   done(null, user)
