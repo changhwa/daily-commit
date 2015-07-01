@@ -48,7 +48,7 @@ gulp.task('server',['coffee'], function(){
   return nodemon({
     script: './bin/www.coffee',
     ext: 'hbs coffee less',
-    stdout: false
+    ignore: ['.idea/**', 'node_modules/**']
   }).on('restart',['jshint','less'], function(){
     setTimeout(function () {
       livereload.changed('./bin/www.coffee');
