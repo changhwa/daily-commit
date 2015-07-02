@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) ->
     underscored: true
     timestamps: false
     tableName: "users"
+    classMethods:
+      associate: (models) ->
+        models.userModel.hasMany models.repositoryModel, foreignKey: 'user_access_token'
   )
   userModel.sync(force: true)
   userModel

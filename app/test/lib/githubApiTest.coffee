@@ -5,7 +5,9 @@ GitHubApi = new Api
 
 describe "github api test", () ->
 
-  it 'should be get github repository', (done) ->
+  OK = "200 OK"
+
+  it.skip 'should be get github repository', (done) ->
     param = {}
     param.user = "changhwa"
     param.repo = "geek_note"
@@ -13,11 +15,20 @@ describe "github api test", () ->
       _result.meta.status.should.be.eql "200 OK"
       done()
 
-  it 'should be get repository commit list', (done) ->
+  it.skip 'should be get repository commit list', (done) ->
     param = {}
     param.user = "changhwa"
     param.repo = "geek_note"
     param.per_page = 500
     GitHubApi.getRepositoryCommits param, (_result) ->
       console.log _result.length
+      done()
+
+  it 'should be get repositories by user', (done) ->
+    param = {}
+    param.user = "changhwa"
+    param.per_page = "10"
+    GitHubApi.getRepositoriesByUser param, (_result) ->
+      console.log _result
+      _result.meta.status.should.be.eql OK
       done()

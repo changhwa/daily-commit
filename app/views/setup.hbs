@@ -1,0 +1,54 @@
+
+<section>
+  <div id="show_repositories" class="">
+    <select id="repository_select" style="display: none" multiple="multiple" class="form-control multiselect multiselect-info">
+
+    </select>
+  </div>
+</section>
+
+<script>
+
+  $.ajax({
+    url: "/setup/api/repositories"
+  }).done(function( _result ) {
+    console.log(_result);
+    var tmpl = "";
+    $.each(_result.repositories, function(idx, item){
+      tmpl += '<option value="' + item.id +'">'+ item.full_name+ '</option>';
+    });
+
+    var $select = $("#repository_select");
+    $select.html(tmpl);
+    $select.show();
+    $select.select2({dropdownCssClass: 'dropdown-inverse'});
+
+    $select.select2().on('select2-selecting', function(e){
+      var param = {};
+      param.repository_id = e.choice.id;
+      param.repository_name = e.choice.text;
+
+      $.ajax({
+        method: 'post',
+        url: "/setup/api/repositories",
+        data: param
+      }).done(function(e){
+
+      });
+    }).on('select2-removed', function(e){
+      var param = {};
+      param.repository_id = e.choice.id;
+      param.repository_name = e.choice.text;
+
+      $.ajax({
+        method: 'delete',
+        url: "/setup/api/repositories",
+        data: param
+      }).done(function(e){
+
+      });
+    });
+
+
+  });
+</script>

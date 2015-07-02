@@ -5,7 +5,12 @@
     <link rel='stylesheet' href="/components/bootstrap/dist/css/bootstrap.css" />
     <link rel='stylesheet' href="/components/fontawesome/css/font-awesome.css" />
     <link rel='stylesheet' href="/components/flat-ui/dist/css/flat-ui.css" />
+    <link rel='stylesheet' href="/components/select2/dist/css/select2.min.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/components/flat-ui/dist/js/flat-ui.js"></script>
+    <script type="text/javascript" src="/components/select2/dist/js/select2.full.min.js"></script>
   </head>
   <body>
 
@@ -15,10 +20,11 @@
         <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
           {{#if user}}
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.profile.login}} <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.profile.login}}<b class="caret"></b></a>
               <span class="dropdown-arrow"></span>
               <ul class="dropdown-menu">
                 <li><a href="/logout">Logout</a></li>
+                <li><a href="/setup">Setup</a></li>
               </ul>
             </li>
           {{else}}
@@ -27,10 +33,15 @@
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>
-    {{{body}}}
 
-
-    <script type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/components/flat-ui/dist/js/flat-ui.js"></script>
+    <div class="container">
+      <h1>{{{page.title}}}</h1>
+      <hr/>
+      <section>
+        <div class="row">
+          {{{body}}}
+        </div>
+      </section>
+    </div>
   </body>
 </html>

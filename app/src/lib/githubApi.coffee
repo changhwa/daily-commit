@@ -13,6 +13,10 @@ class GithubApi
 
   constructor: () ->
 
+  getRepositoriesByUser: (param, cb) ->
+    github.repos.getFromUser param, (err, res) ->
+      return cb(res)
+
   getRepository: (param, cb) ->
     github.repos.get param, (err, res) ->
       return cb(res)
