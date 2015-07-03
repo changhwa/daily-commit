@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) ->
       defaultValue: DataTypes.UUIDV4
 
     repository_id:
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
 
     repository_name:
       type: DataTypes.STRING
@@ -21,5 +21,5 @@ module.exports = (sequelize, DataTypes) ->
     timestamps: false
     tableName: "repository"
   )
-  repositoryModel.sync(force: true)
+#  repositoryModel.sync(force: true)
   repositoryModel

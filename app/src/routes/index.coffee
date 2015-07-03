@@ -22,8 +22,17 @@ router.get '/setup/api/repositories', (req, res, next) ->
   param.user = req.session.passport.user.profile.login
   param.per_page = 100
 
-  GitHubApi.getRepositoriesByUser param, (_result)->
-    res.send repositories: _result
+  repositoryModel.findAll(where: user_access_token: req.session.passport.user.accessToken).then (_dbResult) ->
+    GitHubApi.getRepositoriesByUser param, (_apiResult)->
+      if _dbResult.length > 0
+        for api in _apiResult
+          for db in _dbResult
+            if (api.id == db.repository_id)
+              api.isSelect = true
+              break
+            else
+              api.isSelect = false
+      res.send repositories: _apiResult
 
 router.post '/setup/api/repositories', (req, res, next) ->
   param = req.body
