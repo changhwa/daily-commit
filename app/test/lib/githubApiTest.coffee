@@ -24,7 +24,7 @@ describe "github api test", () ->
       console.log _result.length
       done()
 
-  it 'should be get repositories by user', (done) ->
+  it.skip 'should be get repositories by user', (done) ->
     param = {}
     param.user = "changhwa"
     param.per_page = "10"

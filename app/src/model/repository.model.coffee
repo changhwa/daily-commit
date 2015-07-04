@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) ->
     user_access_token:
       type: DataTypes.STRING
 
+    last_commit_date:
+      type: DataTypes.DATE
+
   ,
     underscored: true
     timestamps: false
