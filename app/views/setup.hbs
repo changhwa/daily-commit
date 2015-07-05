@@ -15,7 +15,7 @@
     console.log(_result);
     var tmpl = "";
     $.each(_result.repositories, function(idx, item){
-      tmpl += '<option value="' + item.id +'"';
+      tmpl += '<option value="' + item.id +'" data-name="' + item.name + '"';
       if(item.isSelect)
         tmpl += " selected";
       tmpl += '>' + item.full_name + '</option>';
@@ -27,9 +27,11 @@
     $select.select2({dropdownCssClass: 'dropdown-inverse'});
 
     $select.select2().on('select2-selecting', function(e){
+
       var param = {};
       param.repository_id = e.choice.id;
-      param.repository_name = e.choice.text;
+      param.repository_name = e.choice.text.split("/")[1];
+      param.repository_full_name = e.choice.text;
 
       $.ajax({
         method: 'post',

@@ -8,6 +8,8 @@ session = require 'express-session'
 passport = require 'passport'
 GithubStrategy = require('passport-github').Strategy
 
+batch = require './src/lib/batch'
+Batch = new batch
 models = require './src/model'
 routes = require './src/routes/index'
 users = require './src/routes/users'
@@ -15,7 +17,7 @@ repository = require './src/routes/repository'
 
 app = express()
 app.use(require('connect-livereload')()) # 나중에 개발모드  / 운영모드 분리해야함
-
+Batch.getCommits()
 # view engine setup
 app.set 'views', path.join __dirname, 'views'
 app.set 'view engine', 'hbs'

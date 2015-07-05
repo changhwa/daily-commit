@@ -17,6 +17,7 @@
     "less-middleware": "1.0.x",
     "moment": "^2.10.3",
     "morgan": "~1.5.1",
+    "node-schedule": "^0.2.9",
     "passport": "^0.2.2",
     "passport-github": "^0.1.5",
     "sequelize": "^3.3.2",
