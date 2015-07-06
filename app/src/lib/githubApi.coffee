@@ -25,5 +25,14 @@ class GithubApi
     github.repos.getCommits model, (err, res) ->
       return cb(res)
 
+  createRepositoryHook: (token, model, cb) ->
+
+    github.authenticate({
+      type: "oauth",
+      token: token
+    })
+
+    github.repos.createHook model, (err, res) ->
+      return cb(res)
 
 module.exports = GithubApi

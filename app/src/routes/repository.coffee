@@ -2,6 +2,8 @@ express = require 'express'
 router = express.Router()
 lib = require '../lib/service'
 service = new lib
+githubApi = require '../lib/githubApi'
+GithubApi = new githubApi
 models = require '../model'
 commitModel = models.commitModel
 repositoryModel = models.repositoryModel
@@ -24,5 +26,14 @@ router.get "/api/:user/:repo/count", (req, res) ->
     console.log _result
     res.send _result+""
 
+router.get '/api/:user/:repo/hooks', (req, res) ->
+  accessToken = req.session.passport.user.accessToken
+  param = req.params
+  param.name = "web"
+  param.config = {}
+  param.config.url = "http://localhost:3000/repository/api/hooks"
+
+  GithubApi.createRepositoryHook accessToken, param, (_result) ->
+    res.send _result
 
 module.exports = router
