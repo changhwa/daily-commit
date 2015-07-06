@@ -67,7 +67,7 @@ app.use '/', routes
 app.use '/users', users
 app.use '/repository', repository
 
-app.get '/auth/github', passport.authenticate('github')
+app.get '/auth/github', passport.authenticate('github', scope: ['notifications','gist','admin:org_hook','admin:repo_hook', 'repo', 'user','admin:org'] )
 app.get '/auth/github/callback', passport.authenticate('github', {failureRedirect:"/?login-error",successRedirect:"/"})
 app.get '/logout', (req, res)->
   req.logout()
