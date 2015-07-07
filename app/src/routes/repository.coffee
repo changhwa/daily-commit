@@ -39,6 +39,7 @@ router.post '/api/:user/:repo/hooks', (req, res) ->
 
 router.post '/api/hooks/payload', (req, res) ->
   console.log req.body
-  res.sendStatus(200)
+  service.saveCommitsByHook req.body, (status) ->
+    res.sendStatus(200)
 
 module.exports = router
