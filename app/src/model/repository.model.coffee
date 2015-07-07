@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) ->
 
     repository_id:
       type: DataTypes.INTEGER
+      unique: 'compositeIndex'
 
     repository_name:
       type: DataTypes.STRING
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) ->
 
     user_access_token:
       type: DataTypes.STRING
+      unique: 'compositeIndex'
 
     last_commit_date:
       type: DataTypes.DATE

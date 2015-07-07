@@ -37,7 +37,8 @@ router.get '/setup/api/repositories', (req, res, next) ->
 router.post '/setup/api/repositories', (req, res, next) ->
   param = req.body
   param.user_access_token = req.session.passport.user.accessToken
-  repositoryModel.build(param).save()
+  repositoryModel.build(param).save().then ->
+    res.sendStatus(200)
 
 router.delete '/setup/api/repositories', (req, res, next) ->
   param = req.body

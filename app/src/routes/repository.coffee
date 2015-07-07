@@ -18,7 +18,7 @@ router.get "/api/:user/:repo", (req, res) ->
   accessToken = req.session.passport.user.accessToken
 
   service.saveCommits param, accessToken, repository_name, (_result) ->
-    res.send _result
+    res.sendStatus(200)
 
 router.get "/api/:user/:repo/count", (req, res) ->
 
@@ -26,15 +26,16 @@ router.get "/api/:user/:repo/count", (req, res) ->
     console.log _result
     res.send _result+""
 
-router.get '/api/:user/:repo/hooks', (req, res) ->
+router.post '/api/:user/:repo/hooks', (req, res) ->
   accessToken = req.session.passport.user.accessToken
   param = req.params
   param.name = "web"
   param.config = {}
-  param.config.url = "http://springair.gift:3000/repository/api/hooks/payload"
+  param.config.url = "http://583dbf27.ngrok.io/repository/api/hooks/payload"
+  param.config.content_type = "json"
 
   GithubApi.createRepositoryHook accessToken, param, (_result) ->
-    res.send _result
+    res.sendStatus(200)
 
 router.post '/api/hooks/payload', (req, res) ->
   console.log req.body

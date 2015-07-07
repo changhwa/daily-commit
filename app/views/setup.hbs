@@ -29,6 +29,7 @@
     $select.select2().on('select2-selecting', function(e){
 
       var param = {};
+      var user = e.choice.text.split("/")[0];
       param.repository_id = e.choice.id;
       param.repository_name = e.choice.text.split("/")[1];
       param.repository_full_name = e.choice.text;
@@ -38,7 +39,22 @@
         url: "/setup/api/repositories",
         data: param
       }).done(function(e){
+        console.log (".......save....");
+        var repositoryUrl = "/repository/api";
 
+        $.ajax({
+          method: 'post',
+          url: repositoryUrl + "/" + user + "/" +  param.repository_name + "/hooks"
+        }).done(function(e){
+
+        });
+
+        $.ajax({
+          method: 'get',
+          url: repositoryUrl + "/" + user + "/" + param.repository_name
+        }).done(function(e){
+
+        });
       });
     }).on('select2-removed', function(e){
       var param = {};
