@@ -13,6 +13,12 @@ class GithubApi
 
   constructor: () ->
 
+  getAuth = (token) ->
+    return github.authenticate(
+      type: "oauth",
+      token: token
+    )
+
   getRepositoriesByUser: (param, cb) ->
     github.repos.getFromUser param, (err, res) ->
       return cb(res)
@@ -27,12 +33,23 @@ class GithubApi
 
   createRepositoryHook: (token, model, cb) ->
 
-    github.authenticate({
-      type: "oauth",
-      token: token
-    })
+    getAuth(token)
 
     github.repos.createHook model, (err, res) ->
+      return cb(res)
+
+  getRepositoryHooks: (model, cb) ->
+
+    getAuth(token)
+
+    github.repos.getHooks model, (err, res) ->
+      return cb(res)
+
+  testRepositoryHook: (model, cb) ->
+
+    getAuth(token)
+
+    github.repos.testHook model, (err, res) ->
       return cb(res)
 
 module.exports = GithubApi

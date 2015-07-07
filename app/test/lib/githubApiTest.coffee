@@ -32,3 +32,23 @@ describe "github api test", () ->
       console.log _result
       _result.meta.status.should.be.eql OK
       done()
+
+  it.skip 'should be can get hooks', (done) ->
+    param = {}
+    param.user = "changhwa"
+    param.repo = "PR-Test"
+    GitHubApi.getRepositoryHooks param, (_result) ->
+      console.log _result
+      _result.meta.status.should.be.eql OK
+      done()
+
+  it.skip 'should be can test hook', (done) ->
+    # 5238868
+    param = {}
+    param.user = "changhwa"
+    param.repo = "PR-Test"
+    param.id = 5238868
+    GitHubApi.testRepositoryHook param, (_result) ->
+      console.log _result
+      _result.meta.status.should.be.eql OK
+      done()

@@ -31,9 +31,13 @@ router.get '/api/:user/:repo/hooks', (req, res) ->
   param = req.params
   param.name = "web"
   param.config = {}
-  param.config.url = "http://localhost:3000/repository/api/hooks"
+  param.config.url = "http://springair.gift:3000/repository/api/hooks/payload"
 
   GithubApi.createRepositoryHook accessToken, param, (_result) ->
     res.send _result
+
+router.post '/api/hooks/payload', (req, res) ->
+  console.log req.body
+  res.sendStatus(200)
 
 module.exports = router
