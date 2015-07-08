@@ -1,4 +1,7 @@
 "use strict"
+
+moment = require 'moment'
+
 module.exports = (sequelize, DataTypes) ->
   commitModel = sequelize.define("commitModel",
 
@@ -23,6 +26,9 @@ module.exports = (sequelize, DataTypes) ->
 
     commit_date:
       type: DataTypes.DATE
+      get: () ->
+        console.log '...'
+        return moment(@.getDataValue('commit_date')).format('YYYYMMDD')
 
   ,
     underscored: true
