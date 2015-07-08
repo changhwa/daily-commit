@@ -59,8 +59,7 @@
     }).on('select2-removed', function(e){
       var param = {};
       param.repository_id = e.choice.id;
-      param.repository_name = e.choice.text;
-
+      param.repository_name = e.choice.text.split("/")[1];
       $.ajax({
         method: 'delete',
         url: "/setup/api/repositories",
