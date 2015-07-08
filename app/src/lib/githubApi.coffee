@@ -38,14 +38,14 @@ class GithubApi
     github.repos.createHook model, (err, res) ->
       return cb(res)
 
-  getRepositoryHooks: (model, cb) ->
+  getRepositoryHooks: (token, model, cb) ->
 
     getAuth(token)
 
     github.repos.getHooks model, (err, res) ->
       return cb(res)
 
-  testRepositoryHook: (model, cb) ->
+  testRepositoryHook: (token, model, cb) ->
 
     getAuth(token)
 
