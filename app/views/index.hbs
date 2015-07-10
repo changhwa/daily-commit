@@ -1,2 +1,17 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+{{#if user}}
+  <div id="cal-heatmap"></div>
+  <script type="text/javascript">
+    var cal = new CalHeatMap();
+    cal.init({
+      itemSelector: "#cal-heatmap",
+      domain: "month",
+      subDomain: "x_day",
+      cellSize: 20, subDomainTextFormat: "%d",
+      range: 1,
+      displayLegend: false,
+      weekStartOnMonday: false
+    });
+  </script>
+{{/if}}
