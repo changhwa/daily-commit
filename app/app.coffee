@@ -40,6 +40,8 @@ app.use passport.initialize()
 app.use passport.session()
 
 # todo : 차후 github 인증 부분은 소스 분리할것
+getAuthScope = ->
+  return ['notifications','gist','admin:org_hook','admin:repo_hook', 'repo', 'user','admin:org']
 
 getConfig = ->
   return (
@@ -67,9 +69,9 @@ app.use '/', routes
 app.use '/users', users
 app.use '/repository', repository
 
-app.get '/auth/github', passport.authenticate('github', scope: ['notifications','gist','admin:org_hook','admin:repo_hook', 'repo', 'user','admin:org'] )
+app.get '/auth/github', passport.authenticate('github', scope: getAuthScope() )
 app.get '/auth/github/callback', passport.authenticate('github', {failureRedirect:"/?login-error",successRedirect:"/"})
-app.get '/logout', (req, res)->
+app.get '/logout', (req, res) ->
   req.logout()
   res.redirect('/')
 

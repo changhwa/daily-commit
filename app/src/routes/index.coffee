@@ -23,7 +23,7 @@ router.get '/setup/api/repositories', (req, res, next) ->
   param.per_page = 100
 
   repositoryModel.findAll(where: user_access_token: req.session.passport.user.accessToken).then (_dbResult) ->
-    GitHubApi.getRepositoriesByUser param, (_apiResult)->
+    GitHubApi.getRepositoriesByUser param, (_apiResult) ->
       if _dbResult.length > 0
         for api in _apiResult
           for db in _dbResult
