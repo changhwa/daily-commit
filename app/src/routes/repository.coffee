@@ -25,7 +25,11 @@ router.put '/api/:user/:repo', (req, res) ->
   param = req.params
 
   GithubApi.getRepositoryLanguage param, (_result) ->
-    repositoryModel.find( where: repository_name: req.param.repo, user_access_token: req.session.passport.user.accessToken ).then (_repo) ->
+    findParam = {
+      repository_name: req.param.repo,
+      user_access_token: req.session.passport.user.accessToken
+    }
+    repositoryModel.find( where: findParam).then (_repo) ->
       language = _result
       delete language.meta
       _repo.updateAttributes( language: JSON.stringify(language) ).then (_update) ->
