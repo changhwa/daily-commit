@@ -54,6 +54,12 @@
           url: repositoryUrl + "/" + user + "/" + param.repository_name
         }).done(function(e){
 
+          $.ajax({
+            method: 'put',
+            url: repositoryUrl +"/" + user + "/" + param.repository_name
+          }).done(function(e){
+
+          });
         });
       });
     }).on('select2-removed', function(e){

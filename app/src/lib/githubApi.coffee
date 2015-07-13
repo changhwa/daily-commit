@@ -52,4 +52,9 @@ class GithubApi
     github.repos.testHook model, (err, res) ->
       return cb(res)
 
+  getRepositoryLanguage: (param, cb) ->
+
+    github.repos.getLanguages param, (err, res) ->
+      return cb(res)
+
 module.exports = GithubApi

@@ -1,16 +1,18 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
 {{#if user}}
   <div id="cal-heatmap"></div>
   <script type="text/javascript">
     var cal = new CalHeatMap();
     cal.init({
+      data: "/statstic/commit/month",
       itemSelector: "#cal-heatmap",
       domain: "month",
       subDomain: "x_day",
-      cellSize: 20, subDomainTextFormat: "%d",
+      cellSize: 15,
+      cellPadding: 3,
+      cellRadius: 5,
+      legend: [1, 3, 5, 7],
       range: 1,
-      displayLegend: false,
       weekStartOnMonday: false
     });
   </script>

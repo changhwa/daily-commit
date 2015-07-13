@@ -20,6 +20,18 @@ router.get "/api/:user/:repo", (req, res) ->
   service.saveCommits param, accessToken, repository_name, (_result) ->
     res.sendStatus(200)
 
+router.put '/api/:user/:repo', (req, res) ->
+
+  param = req.params
+
+  GithubApi.getRepositoryLanguage param, (_result) ->
+    repositoryModel.find( where: repository_name: req.param.repo, user_access_token: req.session.passport.user.accessToken ).then (_repo) ->
+      language = _result
+      delete language.meta
+      _repo.updateAttributes( language: JSON.stringify(language) ).then (_update) ->
+        console.log _update
+        res.sendStatus(200)
+
 router.get "/api/:user/:repo/count", (req, res) ->
 
   commitModel.count(where: [req.parms]).then (_result) ->
@@ -31,7 +43,7 @@ router.post '/api/:user/:repo/hooks', (req, res) ->
   param = req.params
   param.name = "web"
   param.config = {}
-  param.config.url = "http://583dbf27.ngrok.io/repository/api/hooks/payload"
+  param.config.url = "http://springair.gift/repository/api/hooks/payload"
   param.config.content_type = "json"
 
   GithubApi.createRepositoryHook accessToken, param, (_result) ->

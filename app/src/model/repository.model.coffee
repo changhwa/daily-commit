@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) ->
     last_commit_date:
       type: DataTypes.DATE
 
+    language:
+      type: DataTypes.STRING
+
   ,
     underscored: true
     timestamps: false

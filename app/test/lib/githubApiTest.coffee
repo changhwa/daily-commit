@@ -52,3 +52,13 @@ describe "github api test", () ->
       console.log _result
       _result.meta.status.should.be.eql OK
       done()
+
+  it.skip 'should be get repository language', (done) ->
+    param = {}
+    param.user = "changhwa"
+    param.repo = "daily-commit"
+    GitHubApi.getRepositoryLanguage param, (_result) ->
+      language = _result
+      delete language.meta
+      console.log JSON.stringify(language)
+      done()

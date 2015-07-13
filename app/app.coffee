@@ -14,6 +14,7 @@ models = require './src/model'
 routes = require './src/routes/index'
 users = require './src/routes/users'
 repository = require './src/routes/repository'
+statstic = require './src/routes/statstic'
 
 app = express()
 app.use(require('connect-livereload')()) # 나중에 개발모드  / 운영모드 분리해야함
@@ -68,6 +69,7 @@ passport.deserializeUser (obj, done) ->
 app.use '/', routes
 app.use '/users', users
 app.use '/repository', repository
+app.use '/statstic', statstic
 
 app.get '/auth/github', passport.authenticate('github', scope: getAuthScope() )
 app.get '/auth/github/callback', passport.authenticate('github', {failureRedirect:"/?login-error",successRedirect:"/"})
