@@ -37,7 +37,7 @@ gulp.task('jshint',['coffee'], function(){
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('server',['coffee'], function(){
+gulp.task('server',['jshint','coffee-lint'], function(){
   
   var nodemon = require('gulp-nodemon');
   var livereload = require('gulp-livereload');
@@ -49,7 +49,7 @@ gulp.task('server',['coffee'], function(){
     script: './bin/www.coffee',
     ext: 'hbs coffee less',
     ignore: ['.idea/**', 'node_modules/**']
-  }).on('restart',['jshint','less'], function(){
+  }).on('restart',['jshint','coffee-lint','less'], function(){
     setTimeout(function () {
       livereload.changed('./bin/www.coffee');
       gulp.src('./bin/www.coffee').pipe(notify('Reloading page, please wait...'));
