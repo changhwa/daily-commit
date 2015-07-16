@@ -1,8 +1,67 @@
 body {
+  background: #f1f2f7;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.status-card {
+
+  background: #FFF;
+  border-radius: 8px;
+  overflow: hidden;
+
+  > .icon {
+    width: 40%;
+    padding: 25px 25px;
+    display: inline-block;
+
+    > i {
+      color: #FFF;
+      font-size: 50px;
+      text-align: center;
+    }
+  }
+
+  > .value {
+    float: right;
+    display: inline-block;
+    width: 55%;
+    padding-top: 8px;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      color: #c6cad6;
+      font-weight: 200;
+    }
+
+    small {
+      margin: 0;
+      padding: 0;
+      color: #cdd2de;
+      font-weight: 100;
+    }
+  }
+
+  .hoki {
+    background: #67809F;
+  }
+
+  .turquoise{
+    background: #4ECDC4;
+  }
+
+  .silver{
+    background: #bdc3c7;
+  }
+
+  .spray{
+    background: #81CFE0;
+  }
+
 }
