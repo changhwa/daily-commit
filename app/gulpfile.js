@@ -22,8 +22,10 @@ gulp.task('coffee', function(){
 gulp.task('less', function(){
 
   var less = require('gulp-less');
+  var concat = require('gulp-concat');
 
   return gulp.src('./public/less/*.less')
+    .pipe(concat('style.less'))
     .pipe(less())
     .pipe(gulp.dest('./public/stylesheets'));
 });
