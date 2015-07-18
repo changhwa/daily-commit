@@ -39,7 +39,7 @@ gulp.task('jshint',['coffee'], function(){
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('server',['jshint','coffee-lint'], function(){
+gulp.task('server',['jshint','less','coffee-lint'], function(){
   
   var nodemon = require('gulp-nodemon');
   var livereload = require('gulp-livereload');
@@ -50,7 +50,7 @@ gulp.task('server',['jshint','coffee-lint'], function(){
   return nodemon({
     script: './bin/www.coffee',
     ext: 'hbs coffee less',
-    ignore: ['.idea/**', 'node_modules/**']
+    ignore: ['.idea/**', 'node_modules/**', 'public/stylesheets/**']
   }).on('restart',['jshint','coffee-lint','less'], function(){
     setTimeout(function () {
       livereload.changed('./bin/www.coffee');
