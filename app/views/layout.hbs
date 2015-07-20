@@ -93,6 +93,9 @@
           <div class="col-sm-6">
             <div id="heatmap" class="col-sm-offset-3"></div>
           </div>
+          <div class="col-sm-6">
+            <div id="weekend_chart" style="background: #FFFFFF; margin-top: 20px;" class="col-sm-offset-3"></div>
+          </div>
         </div>
       </section>
     </div>
@@ -188,6 +191,21 @@
 
       range: 2,
       weekStartOnMonday: false
+    });
+
+    Morris.Line({
+      element: 'weekend_chart',
+      data: [
+        { y: '2015-07-14', a: 5},
+        { y: '2015-07-15', a: 3},
+        { y: '2015-07-16', a: 4},
+        { y: '2015-07-17', a: 2},
+        { y: '2015-07-18', a: 7},
+        { y: '2015-07-19', a: 8},
+        { y: '2015-07-20', a: 1}
+      ],
+      xkey: 'y',
+      ykeys: 'a'
     });
   </script>
   </body>
